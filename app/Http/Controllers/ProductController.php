@@ -12,7 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::with(['measurement','Category','Brand'])->where('state', 1)->get();
     }
 
     /**
@@ -28,7 +28,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product->brand = $product->Brand;
+        $product->measurement = $product->Measurement;
+        $product->category = $product->Category;
+        return $product;
     }
 
     /**
