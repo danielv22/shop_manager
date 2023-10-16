@@ -12,7 +12,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with(['measurement','Category','Brand'])->where('state', 1)->get();
+        return Product::with([
+            'measurement',
+            'Category',
+            'Brand'
+        ])->where('state', 1)->get();
     }
 
     /**
