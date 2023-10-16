@@ -47,6 +47,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->update(['state' => 0]);
+        
     }
 }
