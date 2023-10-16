@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class DocumentController extends Controller
 {
@@ -12,7 +14,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        //
+        return Document::all();
     }
 
     /**
@@ -20,7 +22,8 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $document = Document::create($request->all());
+        return response()->json(['document'=> $document], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +31,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        //
+        return $document;
     }
 
     /**
@@ -36,7 +39,8 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
-        //
+        $document->update($request->all());
+        return response()->json(['document'=> $document], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +48,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+        return response()->json(['document'=> $document], Response::HTTP_ACCEPTED);
     }
 }

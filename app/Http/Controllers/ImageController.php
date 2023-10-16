@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ImageController extends Controller
 {
@@ -12,7 +13,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        return Image::all();
     }
 
     /**
@@ -20,7 +21,8 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $image = Image::create($request->all());
+        return response()->json(['image'=> $image], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-        //
+        return $image;
     }
 
     /**
@@ -36,7 +38,8 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        //
+        $image->update($request->all());
+        return response()->json(['image'=> $image], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,7 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $image->delete();
+        return response()->json(['image'=> $image], Response::HTTP_ACCEPTED);
     }
 }

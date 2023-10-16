@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SuportingDocument;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class SuportingDocumentController extends Controller
@@ -12,7 +13,7 @@ class SuportingDocumentController extends Controller
      */
     public function index()
     {
-        //
+        return SuportingDocument::all();
     }
 
     /**
@@ -20,7 +21,8 @@ class SuportingDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $suportingDocument = SuportingDocument::create($request->all());
+        return response()->json(['suportingDocument'=> $suportingDocument], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class SuportingDocumentController extends Controller
      */
     public function show(SuportingDocument $suportingDocument)
     {
-        //
+        return $suportingDocument;
     }
 
     /**
@@ -36,7 +38,8 @@ class SuportingDocumentController extends Controller
      */
     public function update(Request $request, SuportingDocument $suportingDocument)
     {
-        //
+        $suportingDocument->update($request->all());
+        return response()->json(['suportingDocument'=> $suportingDocument], Response::HTTP_OK);
     }
 
     /**

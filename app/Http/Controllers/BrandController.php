@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BrandController extends Controller
 {
@@ -12,7 +13,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return ["brands"];
+        return Brand::all();
     }
 
     /**
@@ -20,7 +21,8 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = Brand::create($request->all());
+        return response()->json(['brand'=> $brand], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        return $brand;
     }
 
     /**
@@ -36,7 +38,8 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $brand->update($request->all());
+        return response()->json(['brand'=> $brand], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return response()->json(['brand'=> $brand], Response::HTTP_ACCEPTED);
     }
 }

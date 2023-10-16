@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoicing;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class InvoicingController extends Controller
 {
@@ -12,7 +13,7 @@ class InvoicingController extends Controller
      */
     public function index()
     {
-        //
+        return Invoicing::all();
     }
 
     /**
@@ -20,7 +21,8 @@ class InvoicingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $invoicing = Invoicing::create($request->all());
+        return response()->json(['invoicing'=> $invoicing], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class InvoicingController extends Controller
      */
     public function show(Invoicing $invoicing)
     {
-        //
+        return $invoicing;
     }
 
     /**
@@ -36,7 +38,8 @@ class InvoicingController extends Controller
      */
     public function update(Request $request, Invoicing $invoicing)
     {
-        //
+        $invoicing->update($request->all());
+        return response()->json(['invoicing'=> $invoicing], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,7 @@ class InvoicingController extends Controller
      */
     public function destroy(Invoicing $invoicing)
     {
-        //
+        $invoicing->delete();
+        return response()->json(['invoicing'=> $invoicing], Response::HTTP_ACCEPTED);
     }
 }

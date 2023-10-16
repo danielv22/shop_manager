@@ -23,23 +23,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::apiResource('/api/brands', BrandController::class);
-Route::apiResource('/api/measurements', CategoryController::class);
-Route::apiResource('/api/categories', MeasurementController::class);
-Route::apiResource('/api/products', ProductController::class);
-Route::apiResource('/api/stocks', StockController::class);
-Route::apiResource('/api/purchases', PurchaseController::class);
-Route::apiResource('/api/stock-purchases', \App\Http\Controllers\StockPurchaseController::class);
-Route::apiResource('/api/sales', \App\Http\Controllers\SaleController::class);
-Route::apiResource('/api/stock-sales', \App\Http\Controllers\SaleStockController::class);
-Route::apiResource('/api/checkouts', \App\Http\Controllers\CheckoutController::class);
-Route::apiResource('/api/checkout-sales', \App\Http\Controllers\CheckoutSaleController::class);
-Route::apiResource('/api/checkout-purchases', \App\Http\Controllers\CheckoutPurchaseController::class);
-Route::apiResource('api/checkout-activities', \App\Http\Controllers\CheckoutActivityController::class);
-Route::apiResource('api/images', \App\Http\Controllers\ImageController::class);
-Route::apiResource('api/currencies', \App\Http\Controllers\CurrencyController::class);
-Route::apiResource('api/currency-images', \App\Http\Controllers\CurrencyImageController::class);
-Route::apiResource('api/suporting-documents', \App\Http\Controllers\SuportingDocumentController::class);
-Route::apiResource('api/serie', \App\Http\Controllers\SerieController::class);
+Route::group(['prefix'=>'api'],function (){
+    Route::apiResource('/brands', BrandController::class);
+    Route::apiResource('/measurements', CategoryController::class);
+    Route::apiResource('/categories', MeasurementController::class);
+    Route::apiResource('/products', ProductController::class);
+    Route::apiResource('/stocks', StockController::class);
+    Route::apiResource('/purchases', PurchaseController::class);
+    Route::apiResource('/stock-purchases', \App\Http\Controllers\StockPurchaseController::class);
+    Route::apiResource('/sales', \App\Http\Controllers\SaleController::class);
+    Route::apiResource('/stock-sales', \App\Http\Controllers\SaleStockController::class);
+    Route::apiResource('/checkouts', \App\Http\Controllers\CheckoutController::class);
+    Route::apiResource('/checkout-sales', \App\Http\Controllers\CheckoutSaleController::class);
+    Route::apiResource('/checkout-purchases', \App\Http\Controllers\CheckoutPurchaseController::class);
+    Route::apiResource('/checkout-activities', \App\Http\Controllers\CheckoutActivityController::class);
+    Route::apiResource('/images', \App\Http\Controllers\ImageController::class);
+    Route::apiResource('/currencies', \App\Http\Controllers\CurrencyController::class);
+    Route::apiResource('/currency-images', \App\Http\Controllers\CurrencyImageController::class);
+    Route::apiResource('/suporting-documents', \App\Http\Controllers\SuportingDocumentController::class);
+    Route::apiResource('/serie', \App\Http\Controllers\SerieController::class);
+});
 
 
