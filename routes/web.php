@@ -24,6 +24,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'api'],function (){
+    Route::apiResource('/branches', \App\Http\Controllers\BranchController::class);
     Route::apiResource('/brands', BrandController::class);
     Route::apiResource('/measurements', MeasurementController::class);
     Route::apiResource('/categories', CategoryController::class);
