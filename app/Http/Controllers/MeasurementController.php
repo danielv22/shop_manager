@@ -13,7 +13,7 @@ class MeasurementController extends Controller
      */
     public function index()
     {
-        return measurement::all();
+        return measurement::where('state',1)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class MeasurementController extends Controller
      */
     public function destroy(measurement $measurement)
     {
-        $measurement->delete();
+        $measurement->update(['state'=>0]);
         return response()->json(['measurement'=> $measurement], Response::HTTP_ACCEPTED);
     }
 }

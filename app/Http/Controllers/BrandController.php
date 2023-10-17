@@ -13,7 +13,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return Brand::all();
+        return Brand::where('state',1)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        $brand->delete();
+        $brand->update(['state'=>0]);;
         return response()->json(['brand'=> $brand], Response::HTTP_ACCEPTED);
     }
 }

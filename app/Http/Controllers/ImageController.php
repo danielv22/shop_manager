@@ -13,7 +13,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return Image::all();
+        return Image::where('state',1)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        $image->delete();
+        $image->update(['state'=>0]);
         return response()->json(['image'=> $image], Response::HTTP_ACCEPTED);
     }
 }

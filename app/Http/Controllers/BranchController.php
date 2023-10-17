@@ -14,7 +14,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-        return Branch::all();
+        return Branch::where('state',1)->get();
     }
 
     /**
@@ -48,7 +48,7 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        $branch->delete();
+        $branch->update(['state'=>0]);
         return response()->json(['branch'=> $branch], Response::HTTP_ACCEPTED);
     }
 }

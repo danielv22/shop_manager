@@ -14,7 +14,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return Document::all();
+        return Document::where('state',1)->get();
     }
 
     /**
@@ -48,7 +48,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        $document->delete();
+        $document->update(['state'=>0]);
         return response()->json(['document'=> $document], Response::HTTP_ACCEPTED);
     }
 }

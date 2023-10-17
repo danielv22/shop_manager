@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        return Category::where('state',1)->get();
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        $category->update(['state'=>0]);
         return response()->json(['category'=> $category], Response::HTTP_ACCEPTED);
     }
 }

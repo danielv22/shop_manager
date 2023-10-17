@@ -13,7 +13,7 @@ class MethodController extends Controller
      */
     public function index()
     {
-        return Method::all();
+        return Method::where('state',1)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class MethodController extends Controller
      */
     public function destroy(Method $method)
     {
-        $method->delete();
+        $method->update(['state'=>0]);
         return response()->json(['method'=> $method], Response::HTTP_ACCEPTED);
     }
 }

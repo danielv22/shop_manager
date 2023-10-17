@@ -13,7 +13,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        return Currency::all();
+        return Currency::where('state',1)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class CurrencyController extends Controller
      */
     public function destroy(Currency $currency)
     {
-        $currency->delete();
+        $currency->update(['state'=>0]);
         return response()->json(['currency'=> $currency], Response::HTTP_ACCEPTED);
     }
 }

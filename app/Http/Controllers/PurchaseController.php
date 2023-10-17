@@ -13,7 +13,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return Purchase::all();
+        return Purchase::where('state',1)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        $purchase->delete();
+        $purchase->update(['state'=>0]);
         return response()->json(['purchase'=> $purchase], Response::HTTP_ACCEPTED);
     }
 }
