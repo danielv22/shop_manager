@@ -25,8 +25,8 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'api'],function (){
     Route::apiResource('/brands', BrandController::class);
-    Route::apiResource('/measurements', CategoryController::class);
-    Route::apiResource('/categories', MeasurementController::class);
+    Route::apiResource('/measurements', MeasurementController::class);
+    Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/products', ProductController::class);
     Route::apiResource('/stocks', StockController::class);
     Route::apiResource('/purchases', PurchaseController::class);
