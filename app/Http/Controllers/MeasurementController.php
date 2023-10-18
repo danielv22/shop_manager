@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\measurement;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MeasurementController extends Controller
 {
@@ -12,7 +13,7 @@ class MeasurementController extends Controller
      */
     public function index()
     {
-        //
+        return measurement::where('state',1)->get();
     }
 
     /**
@@ -20,7 +21,8 @@ class MeasurementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $measurement = measurement::create($request->all());
+        return response()->json(['measurement'=> $measurement], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class MeasurementController extends Controller
      */
     public function show(measurement $measurement)
     {
-        //
+        return $measurement;
     }
 
     /**
@@ -36,7 +38,8 @@ class MeasurementController extends Controller
      */
     public function update(Request $request, measurement $measurement)
     {
-        //
+        $measurement->update($request->all());
+        return response()->json(['measurement'=> $measurement], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,7 @@ class MeasurementController extends Controller
      */
     public function destroy(measurement $measurement)
     {
-        //
+        $measurement->update(['state'=>0]);
+        return response()->json(['measurement'=> $measurement], Response::HTTP_ACCEPTED);
     }
 }

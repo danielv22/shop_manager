@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Currency;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CurrencyController extends Controller
 {
@@ -12,7 +13,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        //
+        return Currency::where('state',1)->get();
     }
 
     /**
@@ -20,7 +21,8 @@ class CurrencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $currency = Currency::create($request->all());
+        return response()->json(['currency'=> $currency], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class CurrencyController extends Controller
      */
     public function show(Currency $currency)
     {
-        //
+        return $currency;
     }
 
     /**
@@ -36,7 +38,8 @@ class CurrencyController extends Controller
      */
     public function update(Request $request, Currency $currency)
     {
-        //
+        $currency->update($request->all());
+        return response()->json(['currency'=> $currency], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,7 @@ class CurrencyController extends Controller
      */
     public function destroy(Currency $currency)
     {
-        //
+        $currency->update(['state'=>0]);
+        return response()->json(['currency'=> $currency], Response::HTTP_ACCEPTED);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SaleController extends Controller
 {
@@ -12,7 +13,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        return Sale::all();
     }
 
     /**
@@ -20,7 +21,8 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sale = Sale::create($request->all());
+        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        //
+        return $sale;
     }
 
     /**
@@ -36,7 +38,8 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        //
+        $sale->update($request->all());
+        return response()->json(['sale'=> $sale], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +47,7 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        $sale->delete();
+        return response()->json(['sale'=> $sale], Response::HTTP_ACCEPTED);
     }
 }
