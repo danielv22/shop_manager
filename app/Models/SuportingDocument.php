@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SuportingDocument extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'code', 'state'];
 }
