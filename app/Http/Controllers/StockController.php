@@ -12,7 +12,9 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+        return Stock::with([
+            'product'
+        ])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +22,7 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Stock::create($request->all());
     }
 
     /**
@@ -28,7 +30,8 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        //
+        $stock->product = $stock->Product;
+        return $stock;
     }
 
     /**
@@ -36,7 +39,7 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //
+        $stock->update($request->all());
     }
 
     /**
@@ -44,6 +47,6 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
-        //
+        $stock->update(['state' => 0]);
     }
 }

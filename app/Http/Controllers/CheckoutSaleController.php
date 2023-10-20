@@ -12,7 +12,10 @@ class CheckoutSaleController extends Controller
      */
     public function index()
     {
-        //
+        return CheckoutSale::with([
+            'checkout',
+            'sale'
+        ])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +23,7 @@ class CheckoutSaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        CheckoutSale::create($request->all());
     }
 
     /**
@@ -28,7 +31,9 @@ class CheckoutSaleController extends Controller
      */
     public function show(CheckoutSale $checkoutSale)
     {
-        //
+        $checkoutSale->checkout = $checkoutSale->Checkout;
+        $checkoutSale->sale = $checkoutSale->Sale;
+        return $checkoutSale;
     }
 
     /**
@@ -36,7 +41,7 @@ class CheckoutSaleController extends Controller
      */
     public function update(Request $request, CheckoutSale $checkoutSale)
     {
-        //
+        $checkoutSale->update($request->all());
     }
 
     /**
@@ -44,6 +49,6 @@ class CheckoutSaleController extends Controller
      */
     public function destroy(CheckoutSale $checkoutSale)
     {
-        //
+        $checkoutSale->update(['state' => 0]);
     }
 }

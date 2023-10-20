@@ -12,7 +12,10 @@ class StockPurchaseController extends Controller
      */
     public function index()
     {
-        //
+        return StockPurchase::with([
+            'stock',
+            'purchase'
+        ])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +23,7 @@ class StockPurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        StockPurchase::create($request->all());
     }
 
     /**
@@ -28,7 +31,9 @@ class StockPurchaseController extends Controller
      */
     public function show(StockPurchase $stockPurchase)
     {
-        //
+        $stockPurchase->stock = $stockPurchase->Stock;
+        $stockPurchase->purchase = $stockPurchase->Purchase;
+        return $stockPurchase;
     }
 
     /**
@@ -36,7 +41,7 @@ class StockPurchaseController extends Controller
      */
     public function update(Request $request, StockPurchase $stockPurchase)
     {
-        //
+        $stockPurchase->update($request->all());
     }
 
     /**
@@ -44,6 +49,6 @@ class StockPurchaseController extends Controller
      */
     public function destroy(StockPurchase $stockPurchase)
     {
-        //
+        $stockPurchase->update(['state' => 0]);
     }
 }
