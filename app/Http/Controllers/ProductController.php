@@ -12,7 +12,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::with([
+            'measurement',
+            'Category',
+            'Brand'
+        ])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +24,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
     }
 
     /**
@@ -28,7 +32,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product->brand = $product->Brand;
+        $product->measurement = $product->Measurement;
+        $product->category = $product->Category;
+        return $product;
     }
 
     /**
@@ -36,7 +43,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
     }
 
     /**
@@ -44,6 +51,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->update(['state' => 0]);
+        
     }
 }
