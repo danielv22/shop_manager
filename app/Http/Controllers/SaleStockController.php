@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SaleStock;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SaleStockController extends Controller
 {
@@ -23,7 +24,9 @@ class SaleStockController extends Controller
      */
     public function store(Request $request)
     {
-        SaleStock::create($request->all());
+        $saleStock=SaleStock::create($request->all());
+        return response()->json(['saleStock'=>$saleStock],Response::HTTP_CREATED);
+
     }
 
     /**
@@ -42,6 +45,7 @@ class SaleStockController extends Controller
     public function update(Request $request, SaleStock $saleStock)
     {
         $saleStock->update($request->all());
+        return response()->json(['saleStock'=>$saleStock],Response::HTTP_OK);
     }
 
     /**
@@ -50,5 +54,6 @@ class SaleStockController extends Controller
     public function destroy(SaleStock $saleStock)
     {
         $saleStock->update(['state' => 0]);
+        return response()->json(['saleStock'=>Response::HTTP_ACCEPTED]);
     }
 }
