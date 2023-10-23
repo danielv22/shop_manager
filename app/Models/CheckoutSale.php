@@ -10,6 +10,13 @@ class CheckoutSale extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'checkout_id',
+        'sale_id',
+        'value',
+        'state'
+    ];
+
     public function checkout(): BelongsTo
     {
         return $this->belongsTo(Checkout::class);

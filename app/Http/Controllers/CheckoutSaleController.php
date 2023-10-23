@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckoutSale;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CheckoutSaleController extends Controller
 {
@@ -12,7 +13,10 @@ class CheckoutSaleController extends Controller
      */
     public function index()
     {
-        //
+        return CheckoutSale::with([
+            'checkout',
+            'sale'
+        ])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +24,8 @@ class CheckoutSaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checkoutSale = CheckoutSale::create($request->all());
+        return response()->json(['checkoutSale' => $checkoutSale], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +33,9 @@ class CheckoutSaleController extends Controller
      */
     public function show(CheckoutSale $checkoutSale)
     {
-        //
+        $checkoutSale->checkout = $checkoutSale->Checkout;
+        $checkoutSale->sale = $checkoutSale->Sale;
+        return $checkoutSale;
     }
 
     /**
@@ -36,7 +43,8 @@ class CheckoutSaleController extends Controller
      */
     public function update(Request $request, CheckoutSale $checkoutSale)
     {
-        //
+        $checkoutSale->update($request->all());
+        return response()->json(['checkoutSale' => $checkoutSale], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +52,7 @@ class CheckoutSaleController extends Controller
      */
     public function destroy(CheckoutSale $checkoutSale)
     {
-        //
+        $checkoutSale->update(['state' => 0]);
+        return response()->json(['action' => Response::HTTP_ACCEPTED]);
     }
 }
