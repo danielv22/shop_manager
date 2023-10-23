@@ -49,6 +49,6 @@ class StockController extends Controller
     public function destroy(Stock $stock)
     {
         $stock->update(['state' => 0]);
-        return response()->json(['stock'=>Response::HTTP_ACCEPTED]);
+        return response()->json(['action_status' => Response::HTTP_ACCEPTED]);
     }
 }
