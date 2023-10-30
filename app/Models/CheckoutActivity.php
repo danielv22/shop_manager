@@ -9,8 +9,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CheckoutActivity extends Model
 {
     use HasFactory;
-    public function purchase(): BelongsTo
+
+    protected $fillable = [
+        'checkout_id',
+        'type',
+        'value',
+        'motive'
+
+    ];
+    public function checkout(): BelongsTo
     {
-        return $this->belongsTo(Purchase::class);
+        return $this->belongsTo(Checkout::class);
     }
 }
