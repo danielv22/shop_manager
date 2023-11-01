@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckoutActivity;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CheckoutActivityController extends Controller
 {
@@ -12,7 +13,7 @@ class CheckoutActivityController extends Controller
      */
     public function index()
     {
-        //
+        return CheckoutActivity::with(['checkout'])->get();
     }
 
     /**
@@ -20,7 +21,8 @@ class CheckoutActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checkoutActivity = CheckoutActivity::create($request->all());
+        return response()->json(['checkout_activity' => $checkoutActivity], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,8 @@ class CheckoutActivityController extends Controller
      */
     public function show(CheckoutActivity $checkoutActivity)
     {
-        //
+        $checkoutActivity->checkout = $checkoutActivity->Checkout;
+        return $checkoutActivity;
     }
 
     /**
@@ -36,7 +39,8 @@ class CheckoutActivityController extends Controller
      */
     public function update(Request $request, CheckoutActivity $checkoutActivity)
     {
-        //
+        $checkoutActivity->update($request->all());
+        return response()->json(['checkout_activity' => $checkoutActivity], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +48,6 @@ class CheckoutActivityController extends Controller
      */
     public function destroy(CheckoutActivity $checkoutActivity)
     {
-        //
+        $checkoutActivity->delete();
     }
 }
