@@ -24,24 +24,25 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'api'],function (){
-    Route::apiResource('/brands', BrandController::class);
-    Route::apiResource('/measurements', CategoryController::class);
-    Route::apiResource('/categories', MeasurementController::class);
-    Route::apiResource('/products', ProductController::class);
-    Route::apiResource('/stocks', StockController::class);
-    Route::apiResource('/purchases', PurchaseController::class);
-    Route::apiResource('/stock-purchases', \App\Http\Controllers\StockPurchaseController::class);
-    Route::apiResource('/sales', \App\Http\Controllers\SaleController::class);
-    Route::apiResource('/stock-sales', \App\Http\Controllers\SaleStockController::class);
-    Route::apiResource('/checkouts', \App\Http\Controllers\CheckoutController::class);
-    Route::apiResource('/checkout-sales', \App\Http\Controllers\CheckoutSaleController::class);
-    Route::apiResource('/checkout-purchases', \App\Http\Controllers\CheckoutPurchaseController::class);
-    Route::apiResource('/checkout-activities', \App\Http\Controllers\CheckoutActivityController::class);
-    Route::apiResource('/images', \App\Http\Controllers\ImageController::class);
-    Route::apiResource('/currencies', \App\Http\Controllers\CurrencyController::class);
-    Route::apiResource('/currency-images', \App\Http\Controllers\CurrencyImageController::class);
-    Route::apiResource('/suporting-documents', \App\Http\Controllers\SuportingDocumentController::class);
-    Route::apiResource('/serie', \App\Http\Controllers\SerieController::class);
+    Route::apiResource('/branches', 'BranchController');
+    Route::apiResource('/brands', 'BrandController');
+    Route::apiResource('/measurements', 'MeasurementController');
+    Route::apiResource('/categories', 'CategoryController');
+    Route::apiResource('/products', 'ProductController');
+    Route::apiResource('/stocks', 'StockController');
+    Route::apiResource('/purchases', 'PurchaseController');
+    Route::apiResource('/stock-purchases', 'StockPurchaseController');
+    Route::apiResource('/sales', 'SaleController');
+    Route::apiResource('/stock-sales', 'SaleStockController');
+    Route::apiResource('/checkouts', 'CheckoutController');
+    Route::apiResource('/checkout-sales', 'CheckoutSaleController');
+    Route::apiResource('/checkout-purchases', 'CheckoutPurchaseController');
+    Route::apiResource('/checkout-activities', 'CheckoutActivityController');
+    Route::apiResource('/images', 'ImageController');
+    Route::apiResource('/currencies', 'CurrencyController');
+    Route::apiResource('/currency-images', 'CurrencyImageController');
+    Route::apiResource('/suporting-documents', 'SuportingDocumentController');
+    Route::apiResource('/serie', 'SerieController');
 });
 
 
