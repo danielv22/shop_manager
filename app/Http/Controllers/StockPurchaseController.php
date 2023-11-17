@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StockPurchase;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class StockPurchaseController extends Controller
 {
@@ -12,7 +13,7 @@ class StockPurchaseController extends Controller
      */
     public function index()
     {
-        //
+        return StockPurchase::with(['stock', 'purchase'])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +21,8 @@ class StockPurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stockPurchase = StockPurchase::create($request->all());
+        return response()->json(['stockPurchase' => $stockPurchase], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,9 @@ class StockPurchaseController extends Controller
      */
     public function show(StockPurchase $stockPurchase)
     {
-        //
+        $stockPurchase->stock = $stockPurchase->Stock;
+        $stockPurchase->purchase = $stockPurchase->Purchase;
+        return $stockPurchase;
     }
 
     /**
@@ -36,7 +40,8 @@ class StockPurchaseController extends Controller
      */
     public function update(Request $request, StockPurchase $stockPurchase)
     {
-        //
+        $stockPurchase->update($request->all());
+        return response()->json(['stockPurchase' => $stockPurchase], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +49,7 @@ class StockPurchaseController extends Controller
      */
     public function destroy(StockPurchase $stockPurchase)
     {
-        //
+        $stockPurchase->update(['state' => 0]);
+        return response()->json(['action_status' => Response::HTTP_ACCEPTED]);
     }
 }

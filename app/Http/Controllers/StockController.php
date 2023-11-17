@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class StockController extends Controller
 {
@@ -12,7 +13,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+        return Stock::with(['product'])->where('state', 1)->get();
     }
 
     /**
@@ -20,7 +21,8 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stock = Stock::create($request->all());
+        return response()->json(['stock' => $stock], Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +30,8 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        //
+        $stock->product = $stock->Product;
+        return $stock;
     }
 
     /**
@@ -36,7 +39,8 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //
+        $stock->update($request->all());
+        return response()->json(['stock' => $stock], Response::HTTP_OK);
     }
 
     /**
@@ -44,6 +48,7 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
-        //
+        $stock->update(['state' => 0]);
+        return response()->json(['action_status' => Response::HTTP_ACCEPTED]);
     }
 }
