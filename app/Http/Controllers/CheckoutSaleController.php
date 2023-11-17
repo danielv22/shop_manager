@@ -53,6 +53,6 @@ class CheckoutSaleController extends Controller
     public function destroy(CheckoutSale $checkoutSale)
     {
         $checkoutSale->update(['state' => 0]);
-        return response()->json(['action' => Response::HTTP_ACCEPTED]);
+        return response()->json(['action_status' => Response::HTTP_ACCEPTED]);
     }
 }

@@ -50,6 +50,6 @@ class SaleStockController extends Controller
     public function destroy(SaleStock $saleStock)
     {
         $saleStock->update(['state' => 0]);
-        return response()->json(['action' => Response::HTTP_ACCEPTED]);
+        return response()->json(['action_status' => Response::HTTP_ACCEPTED]);
     }
 }
