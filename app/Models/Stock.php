@@ -13,7 +13,11 @@ class Stock extends Model
     protected $fillable = [
         'product_id',
         'amount',
-        'state'
+        'state',
+        'type',
+        'purchase_price',
+        'sale_price',
+        'reason'
     ];
 
     public function product(): BelongsTo
