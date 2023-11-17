@@ -29,6 +29,7 @@ Route::group(['prefix'=>'api'],function (){
     Route::apiResource('/measurements', MeasurementController::class);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/products', ProductController::class);
+    Route::get('/stocks/kardex/{product}', [StockController::class, 'kardex']);
     Route::apiResource('/stocks', StockController::class);
     Route::apiResource('/purchases', PurchaseController::class);
     Route::apiResource('/stock-purchases', \App\Http\Controllers\StockPurchaseController::class);
