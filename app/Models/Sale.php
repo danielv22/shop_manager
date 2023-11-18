@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sale extends Model
 {
@@ -14,4 +15,14 @@ class Sale extends Model
         'pay',
         'exchange'
     ];
+
+    public function saleStock(): HasMany
+    {
+        return $this->hasMany(SaleStock::class);
+    }
+
+    public function checkoutSale(): HasMany
+    {
+        return $this->hasMany(CheckoutSale::class);
+    }
 }
