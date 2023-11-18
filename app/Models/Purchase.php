@@ -16,9 +16,4 @@ class Purchase extends Model
         'provider',
         'state'
     ];
-
-    public function stockPurchase()
-    {
-        return $this->hasMany(StockPurchase::class);
-    }
 }

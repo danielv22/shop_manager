@@ -29,7 +29,6 @@ Route::group(['prefix'=>'api'],function (){
     Route::apiResource('/measurements', 'MeasurementController');
     Route::apiResource('/categories', 'CategoryController');
     Route::apiResource('/products', 'ProductController');
-    Route::get('/stocks/kardex/{product}', 'StockController@kardex');
     Route::apiResource('/stocks', 'StockController');
     Route::apiResource('/purchases', 'PurchaseController');
     Route::apiResource('/stock-purchases', 'StockPurchaseController');
