@@ -13,7 +13,11 @@ class Sale extends Model
     protected $fillable = [
         'total',
         'pay',
-        'exchange'
+        'exchange',
+        'type',
+        'reason',
+        'client',
+        'status'
     ];
 
     public function saleStock(): HasMany
