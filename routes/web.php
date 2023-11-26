@@ -24,6 +24,8 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'api'],function (){
+    Route::post('/login', 'UserController@login');
+    Route::apiResource('/users', 'UserController');
     Route::apiResource('/branches', 'BranchController');
     Route::apiResource('/brands', 'BrandController');
     Route::apiResource('/measurements', 'MeasurementController');

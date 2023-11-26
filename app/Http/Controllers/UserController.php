@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return User::where('status',1)->get();
     }
 
     /**
@@ -47,7 +50,17 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return Response::Json(['action' => Response::HTTP_ACCEPTED]);
+        $user->status = 0;
+        $user->save();
+        return $user;
+    }
+    public function login(LoginFormRequest $request)
+    {
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password],false)){
+            $user = Auth::user();
+            return $user;
+        }else{
+            return response()->json(['errors'=>['login'=>['Los datos no son validos']]]);
+        }
     }
 }
