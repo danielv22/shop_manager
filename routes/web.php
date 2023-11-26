@@ -36,10 +36,8 @@ Route::group(['prefix'=>'api'],function (){
     Route::apiResource('/stock-purchases', 'StockPurchaseController');
     Route::apiResource('/sales', 'SaleController');
     Route::apiResource('/stock-sales', 'SaleStockController');
-    Route::apiResource('/checkouts', 'CheckoutController');
     Route::apiResource('/checkout-sales', 'CheckoutSaleController');
     Route::apiResource('/checkout-purchases', 'CheckoutPurchaseController');
-    Route::apiResource('/checkout-activities', 'CheckoutActivityController');
     Route::apiResource('/images', 'ImageController');
     Route::apiResource('/currencies', 'CurrencyController');
     Route::apiResource('/currency-images', 'CurrencyImageController');
