@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckoutSale;
 use App\Models\Sale;
 use App\Models\Stock;
 use App\Models\SaleStock;
@@ -62,6 +63,13 @@ class SaleController extends Controller
             }
         }
         return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
+        if(isset($request->checkout_id)){
+            $checkoutSale = new CheckoutSale();
+            $checkoutSale->checkout_id = $request->checkout_id;
+            $checkoutSale->sale_id = $sale->id;
+            $checkoutSale->value = $sale->total;
+            $checkoutSale->save();
+        }
     }
 
     /**

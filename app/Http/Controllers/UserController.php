@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginFormRequest;
+use App\Models\Checkout;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -33,7 +34,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->checkout = $user->Checkout;
         return $user;
+
     }
 
     /**
@@ -58,7 +61,19 @@ class UserController extends Controller
     {
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password],false)){
             $user = Auth::user();
+            $checkout = $user->Checkout;
+            if(empty($checkout)){
+
+                $new_checkout = new Checkout();
+                $new_checkout->user_id = $user->id;
+                $new_checkout->state = 1;
+                $new_checkout->save();
+                $new_checkout = $new_checkout->id;
+
             return $user;
+        }
+        $user->checkout_id = $checkout->id;
+        return $user;
         }else{
             return response()->json(['errors'=>['login'=>['Los datos no son validos']]]);
         }
