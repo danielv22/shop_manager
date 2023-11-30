@@ -19,13 +19,4 @@ class Checkout extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function CheckoutSales(){
-        return $this->hasMany(CheckoutSale::class)->where('state',1);
-    }
-    public function CheckoutPurchases(){
-        return $this->hasMany(CheckoutPurchase::class);
-    }
-    public function CheckoutActivity(){
-        return $this->hasMany(CheckoutActivity::class);
-    }
 }

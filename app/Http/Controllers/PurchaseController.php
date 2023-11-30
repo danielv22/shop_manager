@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CheckoutPurchase;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,11 +23,6 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::create($request->all());
         return response()->json(['purchase'=> $purchase], Response::HTTP_CREATED);
-        $CheckoutPurchase = new CheckoutPurchase();
-        $CheckoutPurchase->checkout_id = $request->caja_id;
-        $CheckoutPurchase->purchase_id = $purchase->id;
-        $CheckoutPurchase->value = $request->total;
-        $CheckoutPurchase->save();
     }
 
     /**
