@@ -31,8 +31,8 @@ class StockController extends Controller
         $product->income = $product->stocks->where('type',1)->sum('amount');
         $product->expenses = $product->stocks->where('type',2)->sum('amount');
         $product->stock = $product->income - $product->expenses;
-        $product->valued = $product->stock * $product->purchase_price;
-        $product->investment= $product->stock * $product->sale_price;
+        $product->valued = $product->stock * $product->sale_price;
+        $product->investment= $product->stock * $product->purchase_price;
         $product->gain = $product->valued - $product->investment;
         return $product;
     }
