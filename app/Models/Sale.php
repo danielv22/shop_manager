@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sale extends Model
 {
@@ -12,6 +13,20 @@ class Sale extends Model
     protected $fillable = [
         'total',
         'pay',
-        'exchange'
+        'exchange',
+        'type',
+        'reason',
+        'client',
+        'status'
     ];
+
+    public function saleStock(): HasMany
+    {
+        return $this->hasMany(SaleStock::class);
+    }
+
+    public function checkoutSale(): HasMany
+    {
+        return $this->hasMany(CheckoutSale::class);
+    }
 }

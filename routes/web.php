@@ -24,20 +24,21 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'api'],function (){
+    Route::post('/login', 'UserController@login');
+    Route::apiResource('/users', 'UserController');
     Route::apiResource('/branches', 'BranchController');
     Route::apiResource('/brands', 'BrandController');
     Route::apiResource('/measurements', 'MeasurementController');
     Route::apiResource('/categories', 'CategoryController');
     Route::apiResource('/products', 'ProductController');
+    Route::get('/stocks/kardex/{product}', 'StockController@kardex');
     Route::apiResource('/stocks', 'StockController');
     Route::apiResource('/purchases', 'PurchaseController');
     Route::apiResource('/stock-purchases', 'StockPurchaseController');
     Route::apiResource('/sales', 'SaleController');
     Route::apiResource('/stock-sales', 'SaleStockController');
-    Route::apiResource('/checkouts', 'CheckoutController');
     Route::apiResource('/checkout-sales', 'CheckoutSaleController');
     Route::apiResource('/checkout-purchases', 'CheckoutPurchaseController');
-    Route::apiResource('/checkout-activities', 'CheckoutActivityController');
     Route::apiResource('/images', 'ImageController');
     Route::apiResource('/currencies', 'CurrencyController');
     Route::apiResource('/currency-images', 'CurrencyImageController');
