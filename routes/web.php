@@ -44,6 +44,7 @@ Route::group(['prefix'=>'api'],function (){
     Route::apiResource('/currency-images', 'CurrencyImageController');
     Route::apiResource('/suporting-documents', 'SuportingDocumentController');
     Route::apiResource('/serie', 'SerieController');
+    
 });
 
 
