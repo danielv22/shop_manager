@@ -10,4 +10,8 @@ class Image extends Model
     use HasFactory;
 
     protected $fillable = ['path', 'state'];
+
+    public function urlImage(){
+        return url($this->path);
+    }
 }

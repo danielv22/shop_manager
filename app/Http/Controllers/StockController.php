@@ -27,6 +27,10 @@ class StockController extends Controller
         $product->brand = $product->Brand;
         $product->measurement = $product->Measurement;
         $product->category = $product->Category;
+        $product->image = $product->productImage()->get()->first();
+        if ($product->image!=null){
+            $product->image->url = $product->image->image->urlImage();
+        }
         $product->stocks = $product->stocks()->where('state',1)->get();
         $product->income = $product->stocks->where('type',1)->sum('amount');
         $product->expenses = $product->stocks->where('type',2)->sum('amount');

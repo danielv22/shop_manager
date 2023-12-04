@@ -38,4 +38,8 @@ class Product extends Model
     {
         return $this->hasMany(Stock::class);
     }
+    public function productImage()
+    {
+        return $this->hasMany(ProductImage::class)->with(['Image'])->where("state",1)->orderBy('id','desc');
+    }
 }
