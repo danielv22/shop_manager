@@ -35,7 +35,7 @@ class CheckoutController extends Controller
         $checkout->activities = $checkout->CheckoutActivity()->get();
         $checkout->revenues =  $checkout->activities->where('type',1)->sum('value');
         $checkout->expenses =  $checkout->activities->where('type',2)->sum('value');
-        $checkout->total = floatval($checkout->revenues + $checkout->sales  - $checkout->expenses-$checkout->purchases);
+        $checkout->total = floatval($checkout->revenues + $checkout->sales  - $checkout->expenses - $checkout->purchases);
         $checkout->user = $checkout->User;
         return $checkout;
     }
@@ -45,14 +45,14 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, Checkout $checkout)
     {
-        $checkout->update($request->all());
-        return response()->json(['checkout' => $checkout], Response::HTTP_OK);
         $checkout->state = 0;
         $checkout->save();
+
         $new_checkout = new Checkout();
-        $new_checkout->user_id=$checkout->user_id;
-        $new_checkout->state=1;
+        $new_checkout->user_id = $checkout->user_id;
+        $new_checkout->state = 1;
         $new_checkout->save();
+
         return $new_checkout;
     }
 

@@ -35,7 +35,9 @@ class PurchaseController extends Controller
         $purchase->provider = $request->provider;
         $purchase->motive = $request->motive;
         $purchase->save();
+
         $number = Purchase::all()->count()+1;
+
         if(isset($request->cart)){
             if(!empty($request->cart)){
                 foreach ($request->cart as $m){
@@ -57,12 +59,14 @@ class PurchaseController extends Controller
                 }
             }
         }
-        return response()->json(['purchase'=> $purchase], Response::HTTP_CREATED);
+
         $CheckoutPurchase = new CheckoutPurchase();
-        $CheckoutPurchase->checkout_id = $request->caja_id;
+        $CheckoutPurchase->checkout_id = $request->checkout_id;
         $CheckoutPurchase->purchase_id = $purchase->id;
         $CheckoutPurchase->value = $request->total;
         $CheckoutPurchase->save();
+
+        return response()->json(['purchase'=> $purchase], Response::HTTP_CREATED);
     }
 
     /**

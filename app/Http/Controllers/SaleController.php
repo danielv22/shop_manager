@@ -62,14 +62,15 @@ class SaleController extends Controller
                 }
             }
         }
-        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
-        if(isset($request->checkout_id)){
+        if (isset($request->checkout_id)) {
             $checkoutSale = new CheckoutSale();
             $checkoutSale->checkout_id = $request->checkout_id;
             $checkoutSale->sale_id = $sale->id;
             $checkoutSale->value = $sale->total;
             $checkoutSale->save();
         }
+        // return this->show($sale);
+        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
     }
 
     /**

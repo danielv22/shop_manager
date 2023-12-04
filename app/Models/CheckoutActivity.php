@@ -15,7 +15,6 @@ class CheckoutActivity extends Model
         'type',
         'value',
         'motive'
-
     ];
     public function checkout(): BelongsTo
     {
