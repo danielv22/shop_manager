@@ -87,6 +87,15 @@ class SaleController extends Controller
         return $sale;
     }
 
+    public function pdf(Sale $sale)
+    {
+        $branch = Branch::all()->first();
+        $sale = $this->show($sale);
+        $sale->sucursal = $branch;
+        $pdf = PDF::loadView('reports.sale', ["sale"=>$sale]);
+        return $pdf->stream();
+    }
+
     /**
      * Update the specified resource in storage.
      */
