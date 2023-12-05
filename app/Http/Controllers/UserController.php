@@ -61,14 +61,14 @@ class UserController extends Controller
     {
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password],false)){
             $user = Auth::user();
-            $checkout = $user->Checkout;
+            $checkout = $user->checkout;
             if(empty($checkout)){
 
                 $new_checkout = new Checkout();
                 $new_checkout->user_id = $user->id;
                 $new_checkout->state = 1;
                 $new_checkout->save();
-                $new_checkout = $new_checkout->id;
+                $user->checkout_id = $new_checkout->id;
 
             return $user;
         }

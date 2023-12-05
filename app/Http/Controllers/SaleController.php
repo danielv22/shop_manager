@@ -64,7 +64,7 @@ class SaleController extends Controller
                 }
             }
         }
-        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
+
         if(isset($request->checkout_id)){
             $checkoutSale = new CheckoutSale();
             $checkoutSale->checkout_id = $request->checkout_id;
@@ -72,6 +72,7 @@ class SaleController extends Controller
             $checkoutSale->value = $sale->total;
             $checkoutSale->save();
         }
+        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
     }
 
     /**
