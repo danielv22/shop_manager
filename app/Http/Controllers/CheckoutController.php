@@ -45,8 +45,7 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, Checkout $checkout)
     {
-        $checkout->update($request->all());
-        return response()->json(['checkout' => $checkout], Response::HTTP_OK);
+
         $checkout->state = 0;
         $checkout->save();
         $new_checkout = new Checkout();
