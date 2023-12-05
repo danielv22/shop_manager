@@ -57,12 +57,14 @@ class PurchaseController extends Controller
                 }
             }
         }
-        return response()->json(['purchase'=> $purchase], Response::HTTP_CREATED);
+
         $CheckoutPurchase = new CheckoutPurchase();
-        $CheckoutPurchase->checkout_id = $request->caja_id;
+        $CheckoutPurchase->checkout_id = $request->checkout_id;
         $CheckoutPurchase->purchase_id = $purchase->id;
         $CheckoutPurchase->value = $request->total;
         $CheckoutPurchase->save();
+
+        return response()->json(['purchase'=> $purchase], Response::HTTP_CREATED);
     }
 
     /**

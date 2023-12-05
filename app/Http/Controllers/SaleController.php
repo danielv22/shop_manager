@@ -8,6 +8,8 @@ use App\Models\Stock;
 use App\Models\SaleStock;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Branch;
 
 class SaleController extends Controller
 {
@@ -62,7 +64,7 @@ class SaleController extends Controller
                 }
             }
         }
-        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
+
         if(isset($request->checkout_id)){
             $checkoutSale = new CheckoutSale();
             $checkoutSale->checkout_id = $request->checkout_id;
@@ -70,6 +72,7 @@ class SaleController extends Controller
             $checkoutSale->value = $sale->total;
             $checkoutSale->save();
         }
+        return response()->json(['sale'=> $sale], Response::HTTP_CREATED);
     }
 
     /**
@@ -83,12 +86,22 @@ class SaleController extends Controller
             }]);
         }])->get();
         $sale->date = $sale->created_at->format('Y-m-d');
+        $sale->url_pdf = url('api/report/sales/'.$sale->id);
         return $sale;
     }
 
     /**
      * Update the specified resource in storage.
      */
+
+     public function pdf(Sale $sale)
+    {
+        $branch = Branch::all()->first();
+        $sale = $this->show($sale);
+        $sale->sucursal = $branch;
+        $pdf = PDF::loadView('reports.sale', ["sale"=>$sale]);
+        return $pdf->stream();
+    }
     public function update(Request $request, Sale $sale)
     {
         $sale->update($request->all());
